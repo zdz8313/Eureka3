@@ -53,6 +53,14 @@
             <version>1.4.6.RELEASE</version>
         </dependency>
 
+        <!-- 熔断器 -->
+        <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-hystrix -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-hystrix</artifactId>
+            <version>1.4.7.RELEASE</version>
+        </dependency>
+
     </dependencies>
 
 
