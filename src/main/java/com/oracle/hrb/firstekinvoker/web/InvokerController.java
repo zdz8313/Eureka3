@@ -1,5 +1,8 @@
 package com.oracle.hrb.firstekinvoker.web;
 
+import com.oracle.hrb.firstekinvoker.bean.User;
+import com.oracle.hrb.firstekinvoker.client.UserClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,17 +16,31 @@ import org.springframework.web.client.RestTemplate;
 //加上Configuration变成配置文件
 @Configuration
 public class InvokerController {
-    @Bean
-    @LoadBalanced
-    public RestTemplate getRestTemplate(){
-        return  new RestTemplate();
-    }
+//    @Bean
+//    @LoadBalanced
+//    public RestTemplate getRestTemplate(){
+//        return  new RestTemplate();
+//    }
+
+    @Autowired
+    private UserClient userClient;
     @GetMapping
     public  Object  doSomething(){
-      RestTemplate rt = getRestTemplate();
-    String json =   rt.getForObject("http://first-service-provoider/user",String.class);
-        System.out.println( "执行了doSonthing 。。。。。");
-        System.out.println(json);
-     return  json;
+//      RestTemplate rt = getRestTemplate();
+//    String json =   rt.getForObject("http://first-service-provoider/user",String.class);
+//        System.out.println( "执行了doSonthing 。。。。。");
+//        System.out.println(json);
+//     return  json;
+        return  userClient.getUser();
     }
+
+    @GetMapping("/addUser")
+    public  String addUser(){
+        User user =new User();
+        user.setName("猫腻");
+        user.setPassword("maoni");
+        return  userClient.addUser(user);
+    }
+
+
 }
